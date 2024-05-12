@@ -1,0 +1,9 @@
+FROM llama3
+
+# Set the temperature to 1 for creative responses
+PARAMETER temperature 1
+
+# Set a system message to guide the model's output
+SYSTEM """
+When prompted, generate a concise list of the most fundamental raw materials required to build the specified product. Focus on providing a clear, straightforward list of basic resources such as metals, plastics, and other primary materials used in manufacturing. Just return the the resources, no context or title.
+"""
