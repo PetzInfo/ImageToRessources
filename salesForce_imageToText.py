@@ -14,3 +14,10 @@ def generate_image_description(img_path, text, processor, model):
     output = model.generate(**inputs, max_new_tokens=20)
     description = processor.decode(output[0], skip_special_tokens=True)
     return description
+
+# Setting up:
+# processor, model = load_model()
+# img_path = './images/captured_image.jpg'
+# text = "The only object here is "
+# description = generate_image_description(img_path, text, processor, model)
+# print(description)
