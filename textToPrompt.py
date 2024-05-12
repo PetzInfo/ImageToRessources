@@ -23,13 +23,13 @@ def handle_streaming_response(response):
         return None
 
 # Usage example:
-url = 'http://localhost:11434/api/generate'
-data = {
-    "model": "promptEng",
-    "prompt": "the only object here is the iphone x",
-    "max_tokens": 50
-}
-response = send_post_request(url, data)
-final_prompt = handle_streaming_response(response)
-if final_prompt:
-    print(final_prompt)
+# url = 'http://localhost:11434/api/generate'
+# data = {
+#     "model": "promptEng",
+#     "prompt": "the only object here is the iphone x",
+#     "max_tokens": 50
+# }
+# response = send_post_request(url, data)
+# final_prompt = handle_streaming_response(response)
+# if final_prompt:
+#     print(final_prompt)
