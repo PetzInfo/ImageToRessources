@@ -1,49 +1,92 @@
-# ImageToRessources
+# ImageToResources
 
-The ImageToRessources project is a tool that performs AI operations on images.
-Before you start I recommand to create a new virtual environment for this project.
+The ImageToResources project is an AI-powered tool that processes images to identify objects and determine the basic resources required to create them. This document provides instructions on setting up and using the tool.
 
-e.g.:
+## Prerequisites
+
+Before you start, it is recommended to create a new virtual environment for this project to avoid dependency issues.
+
+```bash
 conda create -n newEnvName python=3.10
+conda activate newEnvName
+```
 
-That way you are making sure not to get any dependency issues.
+Clone the repository to your local machine and navigate to the project directory:
 
-Clone the repository to your local machine.
-Navigate to the project directory: ImageToRessources/
+```bash
+git clone [Repository URL]
+cd ImageToResources/
+```
 
-# Image to Text
-The first step is to figure out what the objekt in an image is, we are using the open source model by salesForce to figure that out.
-1. Go to the salesForce_imageToText.py.
-2. Unhash the code following "# Setting up:".
+## Installation
+
+Install the necessary Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Image to Text
+
+This module uses the Salesforce open-source model to identify objects in images.
+
+1. Navigate to `salesForce_imageToText.py`.
+2. Uncomment the code under "# Setting up:".
 3. Execute the file:
+
+    ```bash
     python salesForce_imageToText.py
-4. The program will most likely terminate due to some missing dependencies. Install the missing dependecies to the newEnvName you created in the begining.
-5. Execute the file again and add missing dependecies until the model runs and you recieve the image description.
-6. Hash out the code following "# Setting up:".
+    ```
 
-# Text to Resource List
-To form a list of resources out of an image description we are passing the description to Metas open source LLM Llama3.
-Therefore this project relies on the llama3 being installed locally on your machine. The easiest way to do that is by using:
+4. If the program terminates due to missing dependencies, install them into your virtual environment (`newEnvName`).
+5. Re-run the file and continue to add missing dependencies until the model runs successfully and you receive the image description.
+6. Comment out the code under "# Setting up:" once setup is complete.
 
-Ollama -> https://ollama.com
+## Text to Resource List
 
-Once installed you can list up your llama3 models with the following command through your terminal:
-    ollama list
-To recieve a list of the resources we need to create a model of llama3. The model is definde in the Modelfile.
-Run the following command to create the model I prepared:
-    ollama create promptEng -f Modelfile
-Now run the ollama model with:
-    ollama run promptEng
-You can enter anything here and the model will try to list up the required resources to create it. 
-Use the following command to stop using the model thorugh the command line:
-    /bye
+This component uses the open-source Llama3 model from Meta to generate a list of resources based on image descriptions.
 
-The ollama model will continue running in the background and we can access it throgh a local API, lets test that.
-1. Open the textToPrompt.py
-2. Unhash all the code following "# Usage example:"
-3. Exetue the script:
+### Setting Up Llama3
+
+Ensure Llama3 is installed on your machine using Ollama. Visit [Ollama](https://ollama.com) for installation instructions.
+
+Once installed list your Llama3 models using:
+
+```bash
+ollama list
+```
+
+Create and run a custom Llama3 model with the provided `Modelfile`:
+
+```bash
+ollama create promptEng -f Modelfile
+ollama run promptEng
+```
+
+You can test the model by entering descriptions directly. Use `/bye` to stop interactive mode.
+
+The model will continue running in the background, accessible via a local API.
+
+### Testing Local API
+
+1. Navigate to `textToPrompt.py`.
+2. Uncomment the code under "# Usage example:".
+3. Execute the script:
+
+    ```bash
     python textToPrompt.py
-4. The model will generate a list of resources based on the image description following ""prompt":" in the data block.
-5. Hash all the code following "# Usage example:" so the file is ready for external usage.
+    ```
 
+4. The script sends a description to the local API, which returns a list of required resources.
+5. Re-comment the code under "# Usage example:" once testing is complete, preparing the file for external use.
+
+## Main Execution
+
+Run the `main.py` to start the full process:
+
+```bash
+python main.py
+```
+
+This script integrates the image capture, description generation, and resource listing into a single workflow.
 
