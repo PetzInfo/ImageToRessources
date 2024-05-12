@@ -2,23 +2,22 @@ from PIL import Image
 from transformers import BlipProcessor, BlipForConditionalGeneration
 import warnings
 
-# Suppress warnings if you don't want to see them in your console
-warnings.filterwarnings('ignore', category=UserWarning, module='transformers')
+def load_model():
+    warnings.filterwarnings('ignore', category=UserWarning, module='transformers')
+    processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
+    model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large")
+    return processor, model
 
-# Set up the image captioning model
-processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
-model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-large")
+def generate_image_description(img_path, text, processor, model):
+    raw_image = Image.open(img_path).convert('RGB')
+    inputs = processor(raw_image, text, return_tensors="pt")
+    output = model.generate(**inputs, max_new_tokens=20)
+    description = processor.decode(output[0], skip_special_tokens=True)
+    return description
 
-img_path = './images/take3.jpeg'  # Make sure the path is correct and accessible
-raw_image = Image.open(img_path).convert('RGB')  # Open the image directly
-
-# Conditional image captioning
+# Usage example:
+processor, model = load_model()
+img_path = './images/take2.jpeg'
 text = "The only object here is "
-inputs = processor(raw_image, text, return_tensors="pt")
-
-# Control the generation length by specifying max_new_tokens
-out = model.generate(**inputs, max_new_tokens=20)
-image_description = processor.decode(out[0], skip_special_tokens=True)
-
-# Only print the final description
-print(image_description)
+description = generate_image_description(img_path, text, processor, model)
+print(description)
