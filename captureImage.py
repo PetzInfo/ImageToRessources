@@ -41,8 +41,13 @@ def capture_image():
             cv2.imwrite('./images/captured_image.jpg', frame)
             print("Image saved!")
             break
+        elif key == ord('q'):
+            cap.release()
+            cv2.destroyAllWindows()
+            return False
 
     cap.release()
     cv2.destroyAllWindows()
+    return True
 
 #capture_image()
