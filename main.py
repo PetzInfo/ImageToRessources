@@ -1,5 +1,5 @@
-from salesForce_imageToText import load_model, generate_image_description
-from textToPrompt import send_post_request, handle_streaming_response
+from image_to_text import load_model, generate_image_description
+from text_to_prompt import send_post_request, handle_streaming_response
 from captureImage import capture_image
 import time
 
